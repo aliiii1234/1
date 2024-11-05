@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه اصلی</title>
+</head>
+<body>
+    <h1>خوش آمدید به برنامه!</h1>
+    <p>شما وارد برنامه شدید و حالا می‌توانید از آن استفاده کنید.</p>
+  <title>برنامه تمرینی</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.3.0/dist/css/persian-datepicker.min.css">
+  <style>
+    /* این استایل‌ها برای اطمینان از چاپ درست PDF هستند */
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 13pt; /* تنظیم اندازه فونت برای PDF */
+      }
+      #student-program {
+        width: 100%; /* عرض کامل صفحه برای PDF */
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        padding: 8px;
+        border: 1px solid #000; /* اضافه کردن مرز برای جدول */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+<div class="name-container">
+  <label for="addName">افزودن نام:</label>
+  <input type="text" id="addName">
+  <button type="button" onclick="addName(event)">جدید</button>
+</div>
+
+  <div>
+  <label for="sessionSelect">انتخاب جلسه:</label>
+  <select id="sessionSelect" onchange="loadSpecificSession()"></select>
+  <button type="button" onclick="editSession()">ویرایش جلسه</button>
+  <button type="button" onclick="removeSession()">حذف جلسه</button>
+    <button id="deleteNameButton" onclick="deleteSelectedName()">حذف نام</button>
+</div>
+    <div>
+      <label for="nameDropdown">انتخاب نام:</label>
+      <select id="nameDropdown"></select>
+       <button type="button" onclick="saveProgram()">ذخیره برنامه</button>
+    <button id="saveBtn" onclick="downloadPDF()">ذخیره به صورت PDF</button>
+    <button onclick="saveAllData()">ذخیره همه داده‌ها</button>
+      </header>
+
+  <main id="student-program">
+    <section>
+      <form>
+        <div class="top-row">
+          <div class="form-row">
+            <label for="studentName">نام
+            </label>
+            <input type="text" id="studentName" placeholder="نام">
+          </div>
+          <label for="exerciseSearch"></label>
+<input type="text" id="exerciseSearch" onkeyup="searchExercise()">
+          
+              <span style="margin: 10px;"><p style="text-align: center;">
+                فروزان دالوند<br> 
+            دارای مدرک بدنسازی درجه 2 زیر نظر فدراسیون  بدنسازی<br> 
+          09165006913
+          </p>
+          </span> <!-- متن بین دو باکس -->
+
+          <div class="form-row">
+            <label for="sessionDate">تاریخ
+            </label>
+            <input type="text" id="sessionDate" placeholder="انتخاب  تاریخ">
+          </div>
+          <div class="watermark">Foroozfit</div>
+          
+        </div>
+      </form>
+      
+      
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <div style="display: flex; align-items: center;">
+                <div>
+  <div class="exercise-input">
+  <input type="text" id="exerciseName"/>
+  <input type="text" id="exerciseLabel"/>
+  <button id="addExerciseButton"></button>  
+<button type="button" id="deleteExerciseButton" onclick="deleteExercise()"></button>
+                <select id="exerciseDropdown" onchange="addExercise()" style="margin-left: 10px;">
+                  <option value="">حرکت</option>
+                  <optgroup label="پرس سینه">
+                    <option value="پرس سینه با هالتر">پرس سینه با هالتر</option>
+                    <option value="فلای سینه دستگاه">فلای سینه دستگاه</option>
+                     <option value="پرس بالا سینه دمبل جفت میز شیبدار یا دستگاه پرس بالا سینه">پرس بالا سینه دمبل جفت میز شیبدار یا دستگاه پرس بالا سینه</option>
+                     <option value="پرس باال سینه دمبل جفت+فالی باال سینه">پرس باال سینه دمبل جفت+فالی باال سینه</option>
+                     <option value="پرس سینه میز تخت">پرس سینه میز تخت</option>
+                    <option value="پرس سینه با دمبل">پرس سینه با دمبل</option>
+                    <option value="پرس سینه شیب دار با دمبل">پرس سینه شیب دار با دمبل</option>
+                    <option value="پرس بالا سینه">پرس بالا سینه</option>
+                    <option value="پرس سینه با وزنه آزاد">پرس سینه با وزنه آزاد</option>
+                  </optgroup>
+                  <optgroup label="زیر بغل">
+                    <option value="زیر بغل هالتر خم">زیر بغل هالتر خم</option>
+                    <option value=" قایقی دسته v"> قایقی دسته v</option>
+                    <option value="پول داون میله صاف سیمکش">پول داون میله صاف سیمکش</option>
+                    <option value="نشر خم هالتر+زیربغل تک دمبل خم">نشر خم هالتر+زیربغل تک دمبل خم</option>
+                    <option value="لت دست باز">لت دست باز</option>
+                    <option value="فیله">فیله</option>
+                    <option value="زیر بغل دمبل جفت خم">زیر بغل دمبل جفت خم</option>
+                  </optgroup>
+                  <optgroup label="سرشانه"><option value="پرس سرشانه دمبل جفت+ نشر از جانب دمبل جفت">پرس سرشانه دمبل جفت+ نشر از جانب دمبل جفت</option>
+                    <option value="نشر از جلو هالتر">نشر از جلو هالتر</option>
+                    <option value="پرس سرشانه دمبل جفت">پرس سرشانه دمبل جفت</option>
+                    <option value="نشر از جانب دمبل جفت">نشر از جانب دمبل جفت</option>
+                     <option value="نشر از جلو دمبل جفت">نشر از جلو دمبل جفت</option>
+                     </optgroup>
+                  <optgroup label="بازو">
+                    <option value="جلو بازو سیمکش میله صاف">جلو بازو سیمکش میله صاف</option>
+                    <option value="جلو بازو دمبل چکشی جفت">جلو بازو دمبل چکشی جفت</option>
+                    <option value="جلو بازو چکشی نشسته + جلو بازو هالتر ez">جلو بازو چکشی نشسته + جلو بازو هالتر ez</option>
+                    <option value="جلو بازو طناب">جلو بازو طناب</option>
+                    <option value="جلو بازو دمبل تک میز لاری">جلو بازو دمبل تک میز لاری</option>
+                     <option value="پشت بازو سیمکش میله صاف">پشت بازو سیمکش میله صاف</option>
+                     <option value="پشت بازو دمبل جفت خم">پشت بازو دمبل جفت خم</option>
+                     <option value="شت بازو میله صاف+چشت بازو دمبل سوئن">شت بازو میله صاف+چشت بازو دمبل سوئن</option>
+                     <option value="پشت بازو تک سیمکش هر دست">پشت بازو تک سیمکش هر دست</option>
+                  </optgroup>
+                  <optgroup label="پا">
+                    <option value="پشت پا خوابیده دستگاه">پشت پا خوابیده دستگاه</option>
+                    <option value="پشت پا ایستاده">پشت پا ایستاده</option>
+                    <option value="اسکوات دمبل میان پا">اسکوات دمبل میان پا</option>
+                    <option value="استپ آپ با نیمکت و دمبل هر پا">استپ آپ با نیمکت و دمبل هر پا</option>
+                    <option value="اسکوات باجلو پا دستگاه">جلو پا دستگاه</option>
+                    <option value="لانج درجا با دمبل هرپا">لانج درجا با دمبل هرپا</option>
+                    <option value="اسکوات دمبل میان پا">اسکوات دمبل میان پا</option>
+                    <option value="ساق پا نشسته">ساق پا نشسته</option>
+                    <option value="اسکوات پرشی">اسکوات پرشی</option>
+                    <option value="سومو اسکات با اسمیت">سومو اسکات با اسمیت</option>
+                    <option value="هیپ تراست با دمبل یا هالتر و نیمکت">هیپ تراست با دمبل یا هالتر و نیمکت</option>
+                    <option value="ددلیفت رومانیایی دمبل جفت">ددلیفت رومانیایی دمبل جفت</option>
+                    <option value="کیک بک با سیمکش هر پا">کیک بک با سیمکش هر پا</option>
+                    <option value="وال سیت">وال سیت</option>
+                    <option value="هاگ پا 4 ثانیه مکث در پایین">هاگ پا 4 ثانیه مکث در پایین سیت</option>
+                    <option value="بلغاری نیمکت">بلغاری نیمکت</option>
+                    <option value="خارج ران سیمکش">خارج ران سیمکش</option>
+                    <option value="میان پا دستگاه">میان پا دستگاه</option>
+                  </optgroup>
+                  <optgroup label="شکم">
+                    <option value="کرانچ">کرانچ</option>
+                    <option value="پلانک شکم">پلانک شکم</option>
+                    <option value="کرانچ شکم خوابیده">کرانچ شکم خوابیده</option>
+                    <option value="شکم روسی با صفحه+کرانچ شکم+پالنک چرخشی">شکم روسی با صفحه+کرانچ شکم+پالنک چرخشی</option>
+                    <option value="پالنک پهلو حرکتی+کرانچ معکوس">پالنک پهلو حرکتی+کرانچ معکوس</option>
+                    <option value="خلبانی">خلبانی</option>
+                      <option value="کوهنوردی+پالنک">کوهنوردی+پالنک</option>
+                      <option value="شکم دوچرخه خوابیده">شکم دوچرخه خوابیده</option>
+                    <option value="حرکت پل">حرکت پل</option>
+                    <option value="حرکت چرخش شکم">حرکت چرخش شکم</option>
+                  </optgroup>
+                </select>
+                <button type="button" class="add-row-btn" id="addRowButton"onclick="addRow()" style="margin-left: 5px;"></button>
+              </div>
+            </th>
+           <th class="small-col">تکرار</th>
+            <th class="small-col">وزنه</th>
+            <th>استراحت</th>
+                 <th class="small-col">اضافه بار</th>
+            <th class="small-col"></th>
+            
+          </tr>
+        </thead>
+        <tbody id="exerciseTableBody">
+          <tr>
+            <td><input type="text" placeholder="حرکت"></td>
+           <td>
+  <input type="text" placeholder="تکرار" class="small-input">
+</td>
+            <td><input type="text" placeholder="وزنه" class="weight-input"></td>
+            <td><input type="text" placeholder="استراحت" class="rest-input" oninput="adjustWidth(this)" /></td>
+             <td><input type="text" placeholder="اضافه بار" class="overload-input"></td>
+            <td><button type="button" id="deleteButton"onclick="removeRow(this)"></button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <section id="notes">
+        <h3>نکات مهم</h3>
+        <ul>
+          <li>قبل از هر جلسه خوب گرم کنید حرکات همان روز را با وزنه سبک یک یا دو ست اجرا کنید</li>
+          <li>استراحت بین ست‌ها 60 تا 90 ثانیه باشد</li>
+          <li>نوشیدن آب بین ست‌ها فراموش نشود</li>
+          <li>آخر هر جلسه حرکات کششی و سرد کردن را انجام دهید</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/persian-date/dist/persian-date.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.3.0/dist/js/persian-datepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+      </body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
